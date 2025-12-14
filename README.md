@@ -5,6 +5,8 @@ Proof of Concept &lt;> Transactional Reconciliation
 
 This project demonstrates an end-to-end data reconciliation solution for matching transactions between a merchant's records of user payments processed through electronic methods and the corresponding transactions reported by the acquirer bank. The goal is to ensure accuracy, detect discrepancies, and maintain financial integrity in payment processing workflows.
 
+![Data Architecture](docs/images/data_architecture.png)   
+
 The reconciliation process involves comparing transaction data from multiple sources, identifying matches based on key attributes such as transaction IDs, amounts, timestamps, and payment methods. This proof of concept showcases a scalable approach to handling large volumes of transactional data, incorporating data ingestion, transformation, matching algorithms, and reporting.
 
 A graphical representation of the reconciliation flow will be included in future updates to illustrate the step-by-step process.
@@ -74,11 +76,11 @@ Configure as follows:
 
 **General**
 
-- Username: testuser
-- Password: testpass
+- Username: `testuser`
+- Password: `testpass`
 
 - folder directory: `srv/sftpgo/data_sftp`
 
 **Permissions**
 
-- * → ✅ all
+- `*` → ✅ all
