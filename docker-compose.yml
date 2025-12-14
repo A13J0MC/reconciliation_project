@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: reconciliation_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./raw_data/data_postgres:/raw_data:ro
+      - ./init-postgresql:/docker-entrypoint-initdb.d:ro
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@reconciliation.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+
+  sftpgo:
+    image: drakkan/sftpgo
+    container_name: sftpgo
+    environment:
+      SFTPGO_DEFAULT_ADMIN_USERNAME: admin
+      SFTPGO_DEFAULT_ADMIN_PASSWORD: admin
+    ports:
+      - "2022:2022"  # SFTP
+      - "8082:8080"  # Web UI
+    volumes:
+      - ./raw_data/data_sftp:/srv/sftpgo/data_sftp
+
+volumes:
+  postgres_data:
