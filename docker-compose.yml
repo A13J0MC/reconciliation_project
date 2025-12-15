@@ -38,5 +38,19 @@ services:
     volumes:
       - ./raw_data/data_sftp:/srv/sftpgo/data_sftp
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "9000:9000"  # API
+      - "9001:9001"  # Console
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
 volumes:
   postgres_data:
+  minio_data:

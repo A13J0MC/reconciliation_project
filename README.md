@@ -22,7 +22,7 @@ A graphical representation of the reconciliation flow will be included in future
    docker-compose up -d
    ```
 
-   This will start the SFTP server on port 2222, the Postgres database on port 5432, pgAdmin on port 8080, and SFTPGo (with web UI) on ports 2022 (SFTP) and 8082 (web).
+   This will start the SFTP server on port 2222, the Postgres database on port 5432, pgAdmin on port 8080, SFTPGo (with web UI) on ports 2022 (SFTP) and 8082 (web), and MinIO on ports 9000 (API) and 9001 (console).
 
 ## Verification
 
@@ -84,3 +84,7 @@ Configure as follows:
 **Permissions**
 
 - `*` → ✅ all
+
+### Accessing MinIO
+
+MinIO provides S3-compatible object storage. Access the web console at http://localhost:9001 with username `minioadmin` and password `minioadmin`. The API is available on port 9000.
