@@ -24,6 +24,38 @@ A graphical representation of the reconciliation flow will be included in future
 
    This will start the SFTP server on port 2222, the Postgres database on port 5432, pgAdmin on port 8080, SFTPGo (with web UI) on ports 2022 (SFTP) and 8082 (web), and MinIO on ports 9000 (API) and 9001 (console).
 
+## Airflow Setup with Astro CLI
+
+To orchestrate the reconciliation workflows, this project uses Apache Airflow deployed via Astro CLI.
+
+### Installing Astro CLI
+
+Follow the official installation guide: https://www.astronomer.io/docs/astro/cli/install-cli
+
+### Deploying Airflow with Astro CLI
+
+Follow the develop project guide: https://www.astronomer.io/docs/astro/cli/develop-project
+
+1. **Create a new Astro project:**
+   ```
+   astro dev init reconciliation-airflow
+   cd reconciliation-airflow
+   ```
+
+2. **Configure your DAGs:**
+   - Add your reconciliation DAGs in the `dags/` folder.
+   - Example: Create `dags/reconciliation_dag.py` with tasks for data ingestion, matching, and reporting.
+
+3. **Start the local Airflow environment:**
+   ```
+   astro dev start
+   ```
+   This will start Airflow on http://localhost:8080 (note: may conflict with pgAdmin; adjust ports if needed).
+
+4. **Access Airflow UI:**
+   - Open http://localhost:8080 in your browser.
+   - Default credentials: admin / admin
+
 ## Verification
 
 ### Accessing the Postgres Database
@@ -88,3 +120,7 @@ Configure as follows:
 ### Accessing MinIO
 
 MinIO provides S3-compatible object storage. Access the web console at http://localhost:9001 with username `minioadmin` and password `minioadmin`. The API is available on port 9000.
+
+
+
+https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart
